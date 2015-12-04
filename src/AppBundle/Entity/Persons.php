@@ -12,8 +12,9 @@ use Doctrine\ORM\Mapping\DiscriminatorMap;
  * Persons
  * @Entity
  * @InheritanceType("JOINED")
- * @DiscriminatorColumn(name="discr", type="string")
- * @DiscriminatorMap({"person" = "Persons", "administrator" = "Administrators"})
+ * @DiscriminatorColumn(name="adminqcm", type="string")
+ * @DiscriminatorColumn(name="userqcm", type="string")
+ * @DiscriminatorMap({"person" = "Persons", "administrator" = "Administrators", "usersqcm" = "UsersQcm"})
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="AppBundle\Entity\PersonsRepository")
  */
