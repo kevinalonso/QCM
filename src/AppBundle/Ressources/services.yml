@@ -1,0 +1,6 @@
+services:
+    appbundle.admin.qcm:
+        class: AppBundle\Admin\QCMAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: QCM, label: QCMs }
+        arguments: [null, AppBundle\Entity\QCMs, AppBundle:QCMAdmin]
