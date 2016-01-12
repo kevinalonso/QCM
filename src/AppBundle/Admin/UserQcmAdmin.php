@@ -7,6 +7,8 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Validator\ErrorElement;
 use Sonata\AdminBundle\Form\FormMapper;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Query\ResultSetMapping;
 
 
 class UserQcmAdmin extends Admin
@@ -38,12 +40,20 @@ class UserQcmAdmin extends Admin
 	// Fields to be shown on lists
 	protected function configureListFields(ListMapper $listMapper)
 	{
+		/*$sql = "SELECT u.id FROM users_qcm";
+		$con = $this->get("database_connection");
+		$get_info = $con->fetchColumn($sql);*/
+		
 		$listMapper
-		->addIdentifier('id','entity',array('class'=>'AppBundle\Entity\Persons'))
+		->addIdentifier('login')
 		->add('password')
 		->add('firstName')
 		->add('lastName')
 		->add('email')
 		;
+		
+		/*SELECT * FROM users_qcm
+		INNER JOIN persons
+		ON persons.id = users_qcm.id*/
 	}
 }
