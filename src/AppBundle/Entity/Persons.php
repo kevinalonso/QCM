@@ -32,7 +32,7 @@ class Persons
     /**
      * @var string
      *
-     * @ORM\Column(name="FirstName", type="string", length=150)
+     * @ORM\Column(name="FirstName", type="string", length=150, nullable=true)
      */
     private $firstName;
 

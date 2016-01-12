@@ -42,6 +42,7 @@
 	<buildpathentry kind="src" path="vendor/sonata-project/exporter/lib"/>
 	<buildpathentry kind="src" path="vendor/doctrine/doctrine-bundle"/>
 	<buildpathentry kind="src" path="vendor/friendsofsymfony/user-bundle"/>
+	<buildpathentry kind="src" path="vendor/symfony/finder"/>
 	<buildpathentry kind="src" path="vendor/symfony/symfony/src/Symfony/Component/HttpFoundation/Resources/stubs"/>
 	<buildpathentry kind="src" path="vendor/incenteev/composer-parameter-handler"/>
 	<buildpathentry kind="src" path="vendor/sonata-project/core-bundle"/>
