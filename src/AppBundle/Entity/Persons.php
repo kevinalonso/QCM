@@ -7,6 +7,9 @@ use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\InheritanceType;
 use Doctrine\ORM\Mapping\DiscriminatorColumn;
 use Doctrine\ORM\Mapping\DiscriminatorMap;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\Groups;
 
 /**
  * Persons
@@ -17,12 +20,14 @@ use Doctrine\ORM\Mapping\DiscriminatorMap;
  * @DiscriminatorMap({"person" = "Persons", "administrator" = "Administrators", "usersqcm" = "UsersQcm"})
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="AppBundle\Entity\PersonsRepository")
+ * @ExclusionPolicy("ALL")
  */
 class Persons
 {
     /**
      * @var integer
-     *
+     * @Groups({"Users"})
+     * @Expose
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -31,22 +36,22 @@ class Persons
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="FirstName", type="string", length=150, nullable=true)
+     * @Expose
+     * @ORM\Column(name="FirstName", type="string", length=150, nullable=false)
      */
     private $firstName;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="LastName", type="string", length=150, nullable=true)
+     * @Expose
+     * @ORM\Column(name="LastName", type="string", length=150, nullable=false)
      */
     private $lastName;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="Email", type="string", length=150, nullable=true)
+     * @Expose
+     * @ORM\Column(name="Email", type="string", length=150, nullable=false)
      */
     private $email;
 
@@ -59,6 +64,13 @@ class Persons
     public function getId()
     {
         return $this->id;
+    }
+    
+    public function setId($id)
+    {
+    	$this->id = $id;
+    
+    	return $this;
     }
 
     /**

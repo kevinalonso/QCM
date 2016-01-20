@@ -1,5 +1,5 @@
 <?php
-namespace AppBundle\Controller;
+namespace AppBundle\Admin;
 
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -9,5 +9,27 @@ use Sonata\AdminBundle\Form\FormMapper;
  
 class GoodAnswerAdmin extends Admin
 {
+	// Fields to be shown on create/edit forms
+	protected function configureFormFields(FormMapper $formMapper)
+	{
+		$formMapper
+		->add('answerQuestion', 'text', array('label' => 'Answer question'))
+		;
+	}
 	
+	// Fields to be shown on filter forms
+	protected function configureDatagridFilters(DatagridMapper $datagridMapper)
+	{
+		$datagridMapper
+		->add('answerQuestion')
+		;
+	}
+	
+	// Fields to be shown on lists
+	protected function configureListFields(ListMapper $listMapper)
+	{
+		$listMapper
+		->addIdentifier('answerQuestion')
+		;
+	}
 }

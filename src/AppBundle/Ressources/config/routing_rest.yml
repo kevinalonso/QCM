@@ -1,0 +1,9 @@
+#app/src/AppBundle/Ressources/config/routing_rest.yml
+#Rest_User : 
+#  type : rest
+#  resource: "@AppBundle/Ressources/config/routing_rest.yml"
+
+users : 
+  type: rest
+  resource:     "AppBundle\Controller\UserQcmController"
+  name_prefix:  api_users_qcm

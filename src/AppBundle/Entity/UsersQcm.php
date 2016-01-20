@@ -4,6 +4,9 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Entity;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\Groups;
 
 
 /**
@@ -11,6 +14,7 @@ use Doctrine\ORM\Mapping\Entity;
  * @Entity
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="AppBundle\Entity\UsersQcmRepository")
+ * @ExclusionPolicy("ALL")
  */
 class UsersQcm extends Persons
 {
@@ -25,7 +29,7 @@ class UsersQcm extends Persons
 
     /**
      * @var string
-     *
+     * @Expose
      * @ORM\Column(name="Login", type="string", length=150)
      */
     private $login;

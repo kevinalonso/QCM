@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use AppBundle\Entity\QCMs;
 
 /**
  * Questions
@@ -29,9 +30,10 @@ class Questions
     private $textQuestion;
     
     /**
-     * @ORM\OneToMany(targetEntity="QCMs", mappedBy="$question_qcm")
+     * @ORM\ManyToOne(targetEntity="QCMs", inversedBy="id_Question")
+     * @ORM\JoinColumn(name="Id_Qcm", referencedColumnName="id")
      */
-    private $id_Question;
+    private $question_qcm;
     
     /**
      * @ORM\ManyToOne(targetEntity="Type", inversedBy="id_Type")
@@ -78,6 +80,16 @@ class Questions
     public function getTextQuestion()
     {
         return $this->textQuestion;
+    }
+    
+    public function getNameQcm(){
+    	$qcm = new QCMs();
+    	return $qcm->getNameQcm();
+    }
+    
+    public function setNameQcm($question_qcm){
+    	$this->question_qcm = $question_qcm;
+    	return $this;
     }
 }
 

@@ -25,21 +25,21 @@ class QCMs
     /**
      * @var string
      *
-     * @ORM\Column(name="NameQcm", type="string", length=150)
+     * @ORM\Column(name="NameQcm", type="string", length=150, nullable=false)
      */
     private $nameQcm;
 
     /**
-     * @var \DateTime
+     * @var \Date
      *
-     * @ORM\Column(name="DateStart", type="datetime")
+     * @ORM\Column(name="DateStart", type="datetime", nullable=true)
      */
     private $dateStart;
 
     /**
-     * @var \DateTime
+     * @var \Date
      *
-     * @ORM\Column(name="DateEnd", type="datetime")
+     * @ORM\Column(name="DateEnd", type="datetime", nullable=true)
      */
     private $dateEnd;
 
@@ -56,11 +56,10 @@ class QCMs
      */
      private $type_qcm;
      
-     /**
-      * @ORM\ManyToOne(targetEntity="Questions", inversedBy="id_Question")
-      * @ORM\JoinColumn(name="Id_Question", referencedColumnName="id")
-      */
-     private $question_qcm;
+    /**
+     * @ORM\OneToMany(targetEntity="Questions", mappedBy="$question_qcm")
+     */
+     private $id_Question;
 
 
     /**
@@ -167,6 +166,14 @@ class QCMs
     public function getIsActive()
     {
         return $this->isActive;
+    }
+    
+    /**
+     * Use to display name QCM in combobox
+     * @return string
+     */
+    public function __toString(){
+    	return $this->nameQcm;
     }
 }
 

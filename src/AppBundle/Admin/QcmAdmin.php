@@ -7,13 +7,16 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Validator\ErrorElement;
 use Sonata\AdminBundle\Form\FormMapper;
  
-class BadAnswerAdmin extends Admin
+class QcmAdmin extends Admin
 {
 	// Fields to be shown on create/edit forms
 	protected function configureFormFields(FormMapper $formMapper)
 	{
 		$formMapper
-		->add('badAnswerQuestion', 'text', array('label' => 'badAnswerQuestion'))
+		->add('nameQcm', 'text', array('label' => 'Name qcm'))
+		->add('dateStart')
+		->add('dateEnd')
+		->add('isActive')
 		;
 	}
 	
@@ -21,7 +24,10 @@ class BadAnswerAdmin extends Admin
 	protected function configureDatagridFilters(DatagridMapper $datagridMapper)
 	{
 		$datagridMapper
-		->add('badAnswerQuestion')
+		->add('nameQcm')
+		->add('dateStart')
+		->add('dateEnd')
+		->add('isActive')
 		;
 	}
 	
@@ -29,7 +35,10 @@ class BadAnswerAdmin extends Admin
 	protected function configureListFields(ListMapper $listMapper)
 	{
 		$listMapper
-		->addIdentifier('badAnswerQuestion')
+		->addIdentifier('nameQcm')
+		->add('dateStart')
+		->add('dateEnd')
+		->add('isActive')
 		;
 	}
 }

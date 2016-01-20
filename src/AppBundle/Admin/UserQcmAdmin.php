@@ -40,10 +40,6 @@ class UserQcmAdmin extends Admin
 	// Fields to be shown on lists
 	protected function configureListFields(ListMapper $listMapper)
 	{
-		/*$sql = "SELECT u.id FROM users_qcm";
-		$con = $this->get("database_connection");
-		$get_info = $con->fetchColumn($sql);*/
-		
 		$listMapper
 		->addIdentifier('login')
 		->add('password')
@@ -51,9 +47,5 @@ class UserQcmAdmin extends Admin
 		->add('lastName')
 		->add('email')
 		;
-		
-		/*SELECT * FROM users_qcm
-		INNER JOIN persons
-		ON persons.id = users_qcm.id*/
 	}
 }
