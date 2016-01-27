@@ -32,7 +32,7 @@ class QuestionAdmin extends Admin
 	{
 		$datagridMapper
 		->add('textQuestion')
-		->add('question_qcm')
+		->add('question')
 		;
 	}
 	
@@ -46,16 +46,3 @@ class QuestionAdmin extends Admin
 	
 	
 }
-
-/*->add('candidatecampaign', 'entity',
- array (
- 'label' => 'NomDuLabel',
- 'class' => 'Adl\\HiringBundle\\Entity\\CandidateCampaign',
- 'property' => 'name',
- 'query_builder' => function(CandidateCampaignRepository $er) use ($id)
- {
- return $er->createQueryBuilder('a')
- ->where('a.candidate = :id')
- ->setParameter('id', $id);
- },
- ))*/

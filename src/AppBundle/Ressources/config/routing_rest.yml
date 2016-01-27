@@ -7,3 +7,23 @@ users :
   type: rest
   resource:     "AppBundle\Controller\UserQcmController"
   name_prefix:  api_users_qcm
+
+qcm : 
+  type: rest
+  resource:     "AppBundle\Controller\QCMController"
+  name_prefix:  api_qcm_rest
+
+question : 
+  type: rest
+  resource:     "AppBundle\Controller\QuestionController"
+  name_prefix:  api_question_rest
+
+goodAnswer : 
+  type: rest
+  resource:     "AppBundle\Controller\GoodAnswerController"
+  name_prefix:  api_goodAnswer_rest
+
+badAnswer : 
+  type: rest
+  resource:     "AppBundle\Controller\BadAnswerController"
+  name_prefix:  api_badAnswer_rest

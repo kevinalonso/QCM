@@ -14,6 +14,7 @@ class GoodAnswerAdmin extends Admin
 	{
 		$formMapper
 		->add('answerQuestion', 'text', array('label' => 'Answer question'))
+		->add('Question', 'entity', array('class' => 'AppBundle\Entity\Questions', 'property' => 'textQuestion'))
 		;
 	}
 	
@@ -22,6 +23,7 @@ class GoodAnswerAdmin extends Admin
 	{
 		$datagridMapper
 		->add('answerQuestion')
+		->add('question_good_answer')
 		;
 	}
 	

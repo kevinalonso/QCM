@@ -29,9 +29,10 @@ class GoodAnswers
     private $answerQuestion;
     
     /**
-     * @ORM\OneToMany(targetEntity="Questions", mappedBy="$question_good_answer")
+     * @ORM\ManyToOne(targetEntity="Questions", inversedBy="id_question_foreign_key")
+     * @ORM\JoinColumn(name="id_Question", referencedColumnName="id")
      */
-    private $id_Good_Answer;
+    private $question_good_answer;
 
 
     /**
@@ -57,6 +58,16 @@ class GoodAnswers
 
         return $this;
     }
+    
+    public function getQuestion(){
+    	$question = new Questions();
+    	return $question->getTextQuestion();
+    }
+    
+    public function setQuestion($question_good_answer){
+    	$this->question_good_answer = $question_good_answer;
+    	return $this;
+    }
 
     /**
      * Get answerQuestion
@@ -67,5 +78,7 @@ class GoodAnswers
     {
         return $this->answerQuestion;
     }
+    
+    
 }
 

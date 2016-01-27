@@ -57,9 +57,9 @@ class QCMs
      private $type_qcm;
      
     /**
-     * @ORM\OneToMany(targetEntity="Questions", mappedBy="$question_qcm")
+     * @ORM\OneToMany(targetEntity="Questions", mappedBy="$id")
      */
-     private $id_Question;
+     private $question;
 
 
     /**

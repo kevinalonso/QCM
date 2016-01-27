@@ -27,6 +27,12 @@ class BadAnswers
      * @ORM\Column(name="BadAnswerQuestion", type="string", length=255)
      */
     private $badAnswerQuestion;
+    
+   /**
+     * @ORM\ManyToOne(targetEntity="Questions", inversedBy="id_question_foreign_key")
+     * @ORM\JoinColumn(name="id_Question", referencedColumnName="id")
+     */
+    private $question_bad_answer;
 
 
     /**
@@ -61,6 +67,16 @@ class BadAnswers
     public function getBadAnswerQuestion()
     {
         return $this->badAnswerQuestion;
+    }
+    
+    public function getQuestion(){
+    	$question = new Questions();
+    	return $question->getTextQuestion();
+    }
+    
+    public function setQuestion($question_bad_answer){
+    	$this->question_bad_answer = $question_bad_answer;
+    	return $this;
     }
 }
 

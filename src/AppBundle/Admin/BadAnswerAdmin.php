@@ -13,7 +13,8 @@ class BadAnswerAdmin extends Admin
 	protected function configureFormFields(FormMapper $formMapper)
 	{
 		$formMapper
-		->add('badAnswerQuestion', 'text', array('label' => 'badAnswerQuestion'))
+		->add('badAnswerQuestion', 'text', array('label' => 'Wrong answer'))
+		->add('Question', 'entity', array('class' => 'AppBundle\Entity\Questions', 'property' => 'textQuestion'))
 		;
 	}
 	
@@ -22,6 +23,7 @@ class BadAnswerAdmin extends Admin
 	{
 		$datagridMapper
 		->add('badAnswerQuestion')
+		->add('question_bad_answer')
 		;
 	}
 	

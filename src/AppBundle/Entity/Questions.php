@@ -30,10 +30,10 @@ class Questions
     private $textQuestion;
     
     /**
-     * @ORM\ManyToOne(targetEntity="QCMs", inversedBy="id_Question")
+     * @ORM\ManyToOne(targetEntity="QCMs", inversedBy="question")
      * @ORM\JoinColumn(name="Id_Qcm", referencedColumnName="id")
      */
-    private $question_qcm;
+    private $qcm;
     
     /**
      * @ORM\ManyToOne(targetEntity="Type", inversedBy="id_Type")
@@ -42,11 +42,11 @@ class Questions
     private $question_qcm_type;
     
     /**
-     * @ORM\ManyToOne(targetEntity="GoodAnswers", inversedBy="id_Good_Answer")
-     * @ORM\JoinColumn(name="Id_Good_Answer", referencedColumnName="id")
+     * @ORM\OneToMany(targetEntity="GoodAnswers", mappedBy="$id_Question")
+     * @ORM\OneToMany(targetEntity="BadAnswers", mappedBy="$id_Question")
      */
-    private $question_good_answer;
-
+    private $id_question_foreign_key;
+    
 
     /**
      * Get id
@@ -87,9 +87,17 @@ class Questions
     	return $qcm->getNameQcm();
     }
     
-    public function setNameQcm($question_qcm){
-    	$this->question_qcm = $question_qcm;
+    public function setNameQcm($question){
+    	$this->question = $question;
     	return $this;
+    }
+    
+    /**
+     * Use to display name QCM in combobox
+     * @return string
+     */
+    public function __toString(){
+    	return $this->textQuestion;
     }
 }
 

@@ -10,10 +10,4 @@ namespace AppBundle\Entity;
  */
 class QCMsRepository extends \Doctrine\ORM\EntityRepository
 {
-	public function selectName() {
-		//SELECT q.nameQcm FROM AppBundle:QCMs q
-		$query = $this->createQueryBuilder('q');
-		
-		return $query->getQuery()->getResult();
-	}
 }
