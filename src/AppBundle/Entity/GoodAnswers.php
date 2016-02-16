@@ -29,7 +29,8 @@ class GoodAnswers
     private $answerQuestion;
     
     /**
-     * @ORM\ManyToOne(targetEntity="Questions", inversedBy="id_question_foreign_key")
+     * inversedBy vis le nom de la variable présente dans l'entity et non la colonne en base de données
+     * @ORM\ManyToOne(targetEntity="Questions", inversedBy="id_question_good_foreign_key")
      * @ORM\JoinColumn(name="id_Question", referencedColumnName="id")
      */
     private $question_good_answer;

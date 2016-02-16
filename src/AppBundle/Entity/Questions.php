@@ -42,10 +42,14 @@ class Questions
     private $question_qcm_type;
     
     /**
-     * @ORM\OneToMany(targetEntity="GoodAnswers", mappedBy="$id_Question")
-     * @ORM\OneToMany(targetEntity="BadAnswers", mappedBy="$id_Question")
+     * @ORM\OneToMany(targetEntity="GoodAnswers", mappedBy="question_good_answer")
      */
-    private $id_question_foreign_key;
+    private $id_question_good_foreign_key;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="BadAnswers", mappedBy="question_bad_answer")
+     */
+    private $id_question_bad_foreign_key;
     
 
     /**
@@ -98,6 +102,15 @@ class Questions
      */
     public function __toString(){
     	return $this->textQuestion;
+    }
+    
+    /*public function setQcm(QCMs $qcm)
+    {
+    	$this->qcm = $qcm;
+    }*/
+    
+    public function getQcmEntity(){
+    	return $this->qcm->getId();
     }
 }
 

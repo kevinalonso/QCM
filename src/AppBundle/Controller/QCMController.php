@@ -38,11 +38,11 @@ class QCMController extends Controller
 	public function getAllQcmAction(){
 		$qcm = $this->getDoctrine()->getManager()
 		->createQueryBuilder('q')
-		->select('q.nameQcm')
+		->select('q.nameQcm,q.id,q.dateStart,q.dateEnd,q.isActive')
 		->from($this->entityQcm, 'q')
 		->getQuery()
 		->getResult();
 		
-		return $qcm;
+		return array('qcm' => $qcm);
 	}
 }

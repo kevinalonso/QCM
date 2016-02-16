@@ -4,6 +4,9 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Entity;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\Groups;
 
 /**
  * QCMs
@@ -57,7 +60,7 @@ class QCMs
      private $type_qcm;
      
     /**
-     * @ORM\OneToMany(targetEntity="Questions", mappedBy="$id")
+     * @ORM\OneToMany(targetEntity="Questions", mappedBy="qcm")
      */
      private $question;
 
@@ -175,5 +178,6 @@ class QCMs
     public function __toString(){
     	return $this->nameQcm;
     }
+    
 }
 

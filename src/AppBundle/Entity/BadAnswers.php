@@ -29,7 +29,7 @@ class BadAnswers
     private $badAnswerQuestion;
     
    /**
-     * @ORM\ManyToOne(targetEntity="Questions", inversedBy="id_question_foreign_key")
+     * @ORM\ManyToOne(targetEntity="Questions", inversedBy="id_question_bad_foreign_key")
      * @ORM\JoinColumn(name="id_Question", referencedColumnName="id")
      */
     private $question_bad_answer;
