@@ -29,7 +29,7 @@ class GoodAnswers
     private $answerQuestion;
     
     /**
-     * inversedBy vis le nom de la variable présente dans l'entity et non la colonne en base de données
+     * inversedBy vise le nom de la variable présente dans l'entity et non la colonne en base de données
      * @ORM\ManyToOne(targetEntity="Questions", inversedBy="id_question_good_foreign_key")
      * @ORM\JoinColumn(name="id_Question", referencedColumnName="id")
      */
@@ -80,6 +80,10 @@ class GoodAnswers
         return $this->answerQuestion;
     }
     
+    public function getEntityQuestion()
+    {
+    	return  $this->question_good_answer->getId();
+    }
     
 }
 

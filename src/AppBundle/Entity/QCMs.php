@@ -63,7 +63,13 @@ class QCMs
      * @ORM\OneToMany(targetEntity="Questions", mappedBy="qcm")
      */
      private $question;
-
+     
+     /**
+      * @ORM\OneToMany(targetEntity="UserAnswers", mappedBy="id_qcm")
+      */
+     private $answer_user;
+	
+     
 
     /**
      * Get id

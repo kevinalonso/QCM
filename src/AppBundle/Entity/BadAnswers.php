@@ -78,5 +78,10 @@ class BadAnswers
     	$this->question_bad_answer = $question_bad_answer;
     	return $this;
     }
+    
+    public function getEntityQuestion()
+    {
+    	return  $this->question_bad_answer->getId();
+    }
 }
 

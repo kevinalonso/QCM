@@ -27,3 +27,8 @@ badAnswer :
   type: rest
   resource:     "AppBundle\Controller\BadAnswerController"
   name_prefix:  api_badAnswer_rest
+
+new_answer_user:
+    pattern: /new_answer_user
+    defaults: { _controller:AppBundleControllerBadAnswerController:newAnsxerUser}
+    methods:  [POST]

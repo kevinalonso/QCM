@@ -36,13 +36,21 @@ class BadAnswerController extends Controller
 	 * return all Good Answer in json
 	 */
 	public function getAllBadAnswerAction(){
-		$badAnswer = $this->getDoctrine()->getManager()
-		->createQueryBuilder('ba')
-		->select('ba.badAnswerQuestion')
-		->from($this->entityBadAnswer, 'ba')
-		->getQuery()
-		->getResult();
+		
+		$badAnswer = $this->getDoctrine()
+		->getRepository('AppBundle\Entity\BadAnswers')
+		->findAll();
+		
+		$data = array();
+		
+		foreach ($badAnswer as $item)
+		{
+			$data[] = array('id'=>$item->getId(),
+					'badAnswerQuestion' => $item->getBadAnswerQuestion(),
+					'idQuestion' => $item->getEntityQuestion()
+			);
+		}
 	
-		return $badAnswer;
+		return array( 'badAnswers' => $data);
 	}
 }

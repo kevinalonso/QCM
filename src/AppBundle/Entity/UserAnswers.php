@@ -27,6 +27,24 @@ class UserAnswers
      * @ORM\Column(name="SendAnswer", type="string", length=255)
      */
     private $sendAnswer;
+    
+    /**
+     * @var unknown
+     * @ORM\Column(name="id_question", type="integer")
+     */
+    private $id_question;
+    
+    /**
+     * @var unknown
+     * @ORM\Column(name="id_answer", type="integer")
+     */
+    private $id_answer;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="QCMs", inversedBy="answer_user")
+     * @ORM\JoinColumn(name="Id_Qcm", referencedColumnName="id")
+     */
+    private $id_qcm;
 
 
     /**
