@@ -20,6 +20,21 @@ class QCMController extends Controller
 	/**
 	 * return just the qcm where id is selected
 	 */
+	public function getQcmEntityAction($id){
+		$qcm = $this->getDoctrine()->getManager()
+		->createQueryBuilder('q')
+		->select('q')
+		->from($this->entityQcm, 'q')
+		->where('q.id ='.$id)
+		->getQuery()
+		->getResult();
+		
+		return $qcm;
+	}
+	
+	/**
+	 * return just the qcm where id is selected
+	 */
 	public function getQcmAction($id){
 		$qcm = $this->getDoctrine()->getManager()
 		->createQueryBuilder('q')
@@ -28,7 +43,7 @@ class QCMController extends Controller
 		->where('q.id ='.$id)
 		->getQuery()
 		->getResult();
-		
+	
 		return $qcm;
 	}
 	

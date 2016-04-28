@@ -28,7 +28,13 @@ badAnswer :
   resource:     "AppBundle\Controller\BadAnswerController"
   name_prefix:  api_badAnswer_rest
 
+#/{idQuestion}/{idAnswer}/{idQcm}*/
 new_answer_user:
-    pattern: /new_answer_user
-    defaults: { _controller:AppBundleControllerBadAnswerController:newAnsxerUser}
-    methods:  [POST]
+  type: rest
+    #path: /new_answer_user
+    #defaults: { _controller:AppBundle.Controller.UserAnswerController:newAnswerUser}
+  resource:    "AppBundle\Controller\UserAnswerController"
+  name_prefix:  api_userAnswer_rest
+  requirements:
+      _method: POST|GET
+  #methods: POST

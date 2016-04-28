@@ -24,7 +24,7 @@ class UserAnswers
     /**
      * @var string
      *
-     * @ORM\Column(name="SendAnswer", type="string", length=255)
+     * @ORM\Column(name="SendAnswer", type="string", length=255,nullable=true)
      */
     private $sendAnswer;
     
@@ -79,6 +79,44 @@ class UserAnswers
     public function getSendAnswer()
     {
         return $this->sendAnswer;
+    }
+    
+    public function getIdQcm()
+    {
+    	return $this->id_qcm;
+    }
+    
+    public function getIdAnswer()
+    {
+    	return $this->id_answer;
+    }
+    
+    public function getIdQuestion()
+    {
+    	return $this->id_question;
+    }
+    
+    public function setQcm($qcm)
+    {
+    	$this->id_qcm = $qcm;
+    }
+    
+    public function setIdQcm($id_qcm)
+    {
+    	$this->id_qcm = $id_qcm;
+    	return $this;
+    }
+    
+    public function setIdQuestion($id_question)
+    {
+    	$this->id_question = $id_question;
+    	return $this;
+    }
+    
+    public function setIdAnswer($id_answer)
+    {
+    	$this->id_answer = $id_answer;
+    	return $this;
     }
 }
 

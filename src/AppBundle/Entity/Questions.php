@@ -91,8 +91,8 @@ class Questions
     	return $qcm->getNameQcm();
     }
     
-    public function setNameQcm($question){
-    	$this->question = $question;
+    public function setNameQcm($qcm){
+    	$this->qcm = $qcm;
     	return $this;
     }
     

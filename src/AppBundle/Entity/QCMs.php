@@ -185,5 +185,9 @@ class QCMs
     	return $this->nameQcm;
     }
     
+    public function getQcmEntity(){
+    	return $this->qcm->getId();
+    }
+    
 }
 
