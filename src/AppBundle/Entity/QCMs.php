@@ -188,6 +188,20 @@ class QCMs
     public function getQcmEntity(){
     	return $this->qcm->getId();
     }
-    
+
+    public function getCategory(){
+        $type_qcm = new Type();
+        return $type_qcm->getCategory();
+    }
+
+    public function setCategory($type_qcm){
+        $this->type_qcm = $type_qcm;
+        return $this;
+    }
+
+    public function getTypeEntity(){
+        return $this->type_qcm->getId();
+    }
+
 }
 

@@ -32,7 +32,6 @@ class QuestionAdmin extends Admin
 	{
 		$datagridMapper
 		->add('textQuestion')
-		->add('question')
 		;
 	}
 	

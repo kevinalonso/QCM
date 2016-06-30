@@ -1,0 +1,325 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\Entity;
+use Doctrine\ORM\Mapping\InheritanceType;
+use Doctrine\ORM\Mapping\DiscriminatorColumn;
+use Doctrine\ORM\Mapping\DiscriminatorMap;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\Groups;
+use FOS\UserBundle\Model\User as BaseUser;
+
+/**
+ * Persons
+ * @Entity
+ * @InheritanceType("JOINED")
+ * @DiscriminatorColumn(name="adminqcm", type="string")
+ * @DiscriminatorColumn(name="userqcm", type="string")
+ * @DiscriminatorMap({"person" = "Persons", "administrator" = "Administrators", "usersqcm" = "UsersQcm"})
+ * @ORM\Table()
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\PersonsRepository")
+ * @ExclusionPolicy("ALL")
+ */
+class Persons extends BaseUser
+{
+    /**
+     * @var integer
+     * @Groups({"Users"})
+     * @Expose
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @var string
+     * @Expose
+     * @ORM\Column(name="FirstName", type="string", length=150, nullable=false)
+     */
+    protected $firstName;
+
+    /**
+     * @var string
+     * @Expose
+     * @ORM\Column(name="LastName", type="string", length=150, nullable=false)
+     */
+    protected $lastName;
+
+    /**
+     * @var string
+     * @Expose
+     * @ORM\Column(name="Emailadmin", type="string", length=150, nullable=false)
+     */
+    protected $emailAdministrator;
+
+    /**
+     * @var string
+     * @Expose
+     * @ORM\Column(name="EmailUser", type="string", length=150, nullable=false)
+     */
+    protected $emailUser;
+
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+    
+    public function setId($id)
+    {
+    	$this->id = $id;
+    
+    	return $this;
+    }
+
+    /**
+     * Set firstName
+     *
+     * @param string $firstName
+     *
+     * @return Persons
+     */
+    public function setFirstName($firstName)
+    {
+        $this->firstName = $firstName;
+
+        return $this;
+    }
+
+    /**
+     * Get firstName
+     *
+     * @return string
+     */
+    public function getFirstName()
+    {
+        return $this->firstName;
+    }
+
+    /**
+     * Set lastName
+     *
+     * @param string $lastName
+     *
+     * @return Persons
+     */
+    public function setLastName($lastName)
+    {
+        $this->lastName = $lastName;
+
+        return $this;
+    }
+
+    /**
+     * Get lastName
+     *
+     * @return string
+     */
+    public function getLastName()
+    {
+        return $this->lastName;
+    }
+
+    /**
+     * Set email
+     *
+     * @param string $email
+     *
+     * @return Persons
+     */
+    public function setEmailAdmin($emailAdministrator)
+    {
+        $this->emailAdministrator = $emailAdministrator;
+
+        return $this;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string
+     */
+    public function getEmailAdmin()
+    {
+        return $this->emailAdministrator;
+    }
+
+     public function setEmailuser($emailUser)
+    {
+        $this->emailUser = $emailUser;
+
+        return $this;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string
+     */
+    public function getEmailUser()
+    {
+        return $this->emailUser;
+    }
+
+    public function __construct()
+   {
+       parent::__construct();
+       // your own logics
+   }
+}
+
+
+////////////////////////////////////////////////////////////////ENTITY UsersQcm
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\Entity;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\Groups;
+//use PUGX\MultiUserBundle\Validator\Constraints\UniqueEntity;
+
+// extends BaseUser
+/**
+ * UsersQcm
+ * @Entity
+ * @ORM\Table()
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\UsersQcmRepository")
+ * @ExclusionPolicy("ALL")
+ */
+class UsersQcm extends Persons
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @var string
+     * @Expose
+     * @ORM\Column(name="Login", type="string", length=150)
+     */
+    protected $login;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Password", type="string", length=20)
+     */
+    protected $password;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="ClassRooms", inversedBy="id_ClassRooms")
+     * @ORM\JoinColumn(name="Id_ClassRooms", referencedColumnName="id")
+     */
+     protected $user_qcm;
+     
+     /**
+      * @ORM\ManyToMany(targetEntity="QCMs")
+      * @ORM\JoinTable(name="User_QCM",
+      *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+      *      inverseJoinColumns={@ORM\JoinColumn(name="qcm_id", referencedColumnName="id")}
+      *      )
+      */
+     private $qcms;
+     /**
+      * Create n n relation
+      */
+     public function __construct() {
+        $this->qcms = new \Doctrine\Common\Collections\ArrayCollection();
+     }
+    
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set login
+     *
+     * @param string $login
+     *
+     * @return UsersQcm
+     */
+    public function setLogin($login)
+    {
+        $this->login = $login;
+
+        return $this;
+    }
+
+    /**
+     * Get login
+     *
+     * @return string
+     */
+    public function getLogin()
+    {
+        return $this->login;
+    }
+
+    /**
+     * Set password
+     *
+     * @param string $password
+     *
+     * @return UsersQcm
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * Get password
+     *
+     * @return string
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+}
+
+
+/////////////////////////////////
+path:  /register/user-qcm
+    defaults: { _controller: userBundleUserBundle:RegisterController:register }
+
+//////////////////////////////////////////// OLD HEDAER TO EXTEND CLASS IN DATABASES
+/**
+ * Persons
+ * @Entity
+ * @InheritanceType("JOINED")
+ * @DiscriminatorColumn(name="adminqcm", type="string")
+ * @DiscriminatorColumn(name="userqcm", type="string")
+ * @DiscriminatorMap({"person" = "Persons", "administrator" = "Administrators", "usersqcm" = "UsersQcm"})
+ * @ORM\Table()
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\PersonsRepository")
+ * @ExclusionPolicy("ALL")
+ */
+
+

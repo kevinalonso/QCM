@@ -24,7 +24,6 @@ class Questions
 
     /**
      * @var string
-     *
      * @ORM\Column(name="TextQuestion", type="string", length=255)
      */
     private $textQuestion;
@@ -103,11 +102,6 @@ class Questions
     public function __toString(){
     	return $this->textQuestion;
     }
-    
-    /*public function setQcm(QCMs $qcm)
-    {
-    	$this->qcm = $qcm;
-    }*/
     
     public function getQcmEntity(){
     	return $this->qcm->getId();

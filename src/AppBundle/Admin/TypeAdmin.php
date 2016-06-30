@@ -13,7 +13,7 @@ class TypeAdmin extends Admin
 	protected function configureFormFields(FormMapper $formMapper)
 	{
 		$formMapper
-		->add('category', 'text', array('label' => 'Type'))
+		->add('category', 'text', array('label' => 'Catégorie'))
 		;
 	}
 	

@@ -51,13 +51,33 @@ class QCMController extends Controller
 	 * return all QCM in json
 	 */
 	public function getAllQcmAction(){
-		$qcm = $this->getDoctrine()->getManager()
+		/*$qcm = $this->getDoctrine()->getManager()
 		->createQueryBuilder('q')
 		->select('q.nameQcm,q.id,q.dateStart,q.dateEnd,q.isActive')
 		->from($this->entityQcm, 'q')
 		->getQuery()
 		->getResult();
 		
-		return array('qcm' => $qcm);
+		return array('qcm' => $qcm);*/
+		$qcm = $this->getDoctrine()
+		->getRepository('AppBundle\Entity\QCMs')
+		->findAll();
+		
+		$data = array();
+
+		foreach ($qcm as $qcms)
+		{
+			$data[] = array('nameQcm'=>$qcms->getNameQcm(),
+					'id' => $qcms->getId(),
+					'dateStart' => $qcms->getDateStart(),
+					'dateEnd' => $qcms->getDateEnd(),
+					'isActive' => $qcms->getIsActive(),
+					'idType' => $qcms->getTypeEntity()
+			);
+		}
+		/**
+		 * return my question and his Qcm
+		 */
+		return array( 'qcms' => $data);
 	}
 }

@@ -22,7 +22,6 @@ class UserQcmAdmin extends Admin
 		->add('firstName')
 		->add('lastName')
 		->add('email')
-		->add('category', 'entity', array('class' => 'AppBundle\Entity\Type', 'property' => 'category'))
 		;
 	}
 

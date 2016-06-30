@@ -24,15 +24,10 @@ class UserAnswerController extends Controller
 		$userAnswer = null;
 		if ($request->getMethod() == 'POST')
 		{
-			//var_dump($request->getMethod());
-			//$controllerQCM = new QCMController();
+			
 			$id_qcm = $request->get('idQcm');
 			$qcm = $this->getDoctrine()->getEntityManager()->getRepository("\AppBundle\Entity\QCMs")->find($id_qcm);
-			//var_dump($qcm->getId());
-			//echo $id_qcm;
-			//$qcm = $controllerQCM->getQcmEntityAction($id_qcm);
-			//echo "test";
-			//var_dump($qcm);
+			
 			$userAnswer = new UserAnswers();
 			
 			$userAnswer->setIdQuestion($request->get('idQuestion',1));

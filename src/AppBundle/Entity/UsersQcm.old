@@ -1,0 +1,47 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\Entity;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\Groups;
+//use PUGX\MultiUserBundle\Validator\Constraints\UniqueEntity;
+
+// extends BaseUser
+/**
+ * UsersQcm
+ * @Entity
+ * @ORM\Table()
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\UsersQcmRepository")
+ * @ExclusionPolicy("ALL")
+ */
+class UsersQcm extends Persons
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+     
+     /**
+      * @ORM\ManyToMany(targetEntity="QCMs")
+      * @ORM\JoinTable(name="User_QCM",
+      *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+      *      inverseJoinColumns={@ORM\JoinColumn(name="qcm_id", referencedColumnName="id")}
+      *      )
+      */
+     private $qcms;
+     /**
+      * Create n n relation
+      */
+     public function __construct() {
+     	$this->qcms = new \Doctrine\Common\Collections\ArrayCollection();
+     }
+}
+

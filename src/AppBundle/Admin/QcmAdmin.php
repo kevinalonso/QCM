@@ -17,6 +17,7 @@ class QcmAdmin extends Admin
 		->add('dateStart')
 		->add('dateEnd')
 		->add('isActive')
+		->add('category', 'entity', array('class' => 'AppBundle\Entity\Type', 'property' => 'category'))
 		;
 	}
 	

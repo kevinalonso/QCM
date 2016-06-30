@@ -36,16 +36,18 @@ class UsersQcm extends Persons
 
     /**
      * @var string
-     *
+     * @Expose
      * @ORM\Column(name="Password", type="string", length=20)
      */
     private $password;
-    
+
+
     /**
-     * @ORM\ManyToOne(targetEntity="ClassRooms", inversedBy="id_ClassRooms")
-     * @ORM\JoinColumn(name="Id_ClassRooms", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Type", inversedBy="id_Type")
+     * @ORM\JoinColumn(name="Id_Type", referencedColumnName="id")
      */
-     private $user_qcm;
+     private $type_qcm;
+    
      
      /**
       * @ORM\ManyToMany(targetEntity="QCMs")
@@ -119,6 +121,20 @@ class UsersQcm extends Persons
     public function getPassword()
     {
         return $this->password;
+    }
+
+    public function getCategory(){
+        $type_qcm = new Type();
+        return $type_qcm->getCategory();
+    }
+
+    public function setCategory($type_qcm){
+        $this->type_qcm = $type_qcm;
+        return $this;
+    }
+
+    public function getTypeEntity(){
+        return $this->type_qcm->getId();
     }
 }
 

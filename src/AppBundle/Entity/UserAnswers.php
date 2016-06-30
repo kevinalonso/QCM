@@ -22,9 +22,9 @@ class UserAnswers
     private $id;
 
     /**
-     * @var string
+     * @var int
      *
-     * @ORM\Column(name="SendAnswer", type="string", length=255,nullable=true)
+     * @ORM\Column(name="id_user", type="integer")
      */
     private $sendAnswer;
     
@@ -39,6 +39,12 @@ class UserAnswers
      * @ORM\Column(name="id_answer", type="integer")
      */
     private $id_answer;
+
+     /**
+     * @var unknown
+     * @ORM\Column(name="point", type="integer")
+     */
+    private $point;
     
     /**
      * @ORM\ManyToOne(targetEntity="QCMs", inversedBy="answer_user")
@@ -117,6 +123,17 @@ class UserAnswers
     {
     	$this->id_answer = $id_answer;
     	return $this;
+    }
+
+    public function setPoint($point)
+    {
+        $this->point = $point;
+        return $this;
+    }
+    
+    public function getPoint()
+    {
+       return $this->point;
     }
 }
 
