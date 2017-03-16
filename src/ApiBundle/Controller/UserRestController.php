@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use ApiBundle\Entity\User;
 
-class UserRestController extends Controller
+class UserRestController extends BaseController
 {
 
 	private $username;
@@ -136,20 +136,6 @@ class UserRestController extends Controller
 		return $result[0]["salt"];
 	}
 	
-	/**
-	 * Génération string random
-	 * @param unknown $length
-	 * @return string
-	 */
-	private function generateString($length) {
-		$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-		$string = '';
-	
-		for ($i = 0; $i < $length; $i++) {
-			$string .= $characters[mt_rand(0, strlen($characters) - 1)];
-		}
-		return $string;
-	}
 	/**
 	 * Hash string
 	 * @return string

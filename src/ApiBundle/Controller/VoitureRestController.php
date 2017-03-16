@@ -8,7 +8,7 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 
-class VoitureRestController extends Controller
+class VoitureRestController extends BaseController
 {
 	private $dateRetrait;
 	private $dateRetour;
@@ -22,7 +22,6 @@ class VoitureRestController extends Controller
 	private $nbPorte;
 	private $nbPassage;
 	
-	private $token;
   public function getVoitureAction(Request $request){
    
 
@@ -99,37 +98,5 @@ class VoitureRestController extends Controller
   	
   	return $voitures;
   	
-  }
-  /**
-   * Test si le token est valide
-   * @return boolean
-   */
-  private function isValid(){
-  	$em = $this->getDoctrine()->getManager();
-  	$query = $em->createQuery('SELECT u.id, u.dateToken FROM ApiBundle:User u WHERE u.token = :token')
-  	->setParameter('token', $this->token);
-  
-  	$result = $query->getResult();
-  	// Si le token n'existe pas
-  	if(empty($result)) {
-  		return false;
-  	}
-  
-  	// Comparaison de la date
-  	$dateToken = new \DateTime($result[0]["dateToken"]->format('Y-m-d H:i:s'));
-  	$now = new \DateTime(date('Y-m-d H:i:s'));
-  	$interval = $dateToken->diff($now)->format('%d');
-  	if($interval > 7) {
-  		return false;
-  	}
-  	return true;
-  }
-  private function createDate($date) {
-  
-  	$dateformat = \DateTime::createFromFormat('j:m:Y:H:i',$date);
-  	if($dateformat == false) {
-  		return false;
-  	}
-  	return $dateformat;
   }
 }
