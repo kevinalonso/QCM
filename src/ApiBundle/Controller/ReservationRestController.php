@@ -19,6 +19,7 @@ class ReservationRestController extends Controller
 	private $adresseRetrait;
 	private $adresseRetour;
 	private $token;
+	private $numReservation;
 	
   public function postReservationAction(Request $request){
   	$response = new Response();
@@ -81,6 +82,40 @@ class ReservationRestController extends Controller
    $obj = new \stdClass();
    $obj->numeroReservation=$numResa;
    return json_encode($obj);
+  }
+  
+  public function getReservationMesreservationAction(Request $request) {
+  	
+  	$this->token = $request->query->get('token');
+  	
+  	//** Test si le token est valide **//
+  	// Si token invalide : accès refusé
+  	$response = new Response();
+  	if(!$this->isValid()) {
+  		$response->setStatusCode(Response::HTTP_FORBIDDEN);
+  		return $response;
+  	}
+
+  	$UserReservations = $this->getUserReservations();
+
+  	return $UserReservations;
+  }
+  
+  public function getReservationInfoAction(Request $request) {
+  	
+  	$this->token = $request->query->get('token');
+  	$this->numReservation = $request->query->get('numeroReservation');
+  	 
+  	//** Test si le token est valide **//
+  	// Si token invalide : accès refusé
+  	$response = new Response();
+  	if(!$this->isValid()) {
+  		$response->setStatusCode(Response::HTTP_FORBIDDEN);
+  		return $response;
+  	}
+  	
+  	return $this->getinfoReservation();
+
   }
   
   /**
@@ -153,6 +188,11 @@ class ReservationRestController extends Controller
   	}
   	return true;
   }
+  /**
+   * Create date
+   * @param unknown $date
+   * @return boolean|unknown
+   */
   private function createDate($date) {
   	$dateformat = \DateTime::createFromFormat('j:m:Y:H:i',$date);
   	if($dateformat == false) {
@@ -174,6 +214,27 @@ class ReservationRestController extends Controller
   	}
   	return $string;
   }
-  
-  
+  /**
+   * Récupère les réservation d'un utilisateur
+   * @return unknown
+   */
+  private function getUserReservations() {
+  	$em = $this->getDoctrine()->getManager();
+  	$query = $em->createQuery('SELECT r.numReservation FROM ApiBundle:Reservation r WHERE r.idUser = :idUser')
+  	->setParameter('idUser', $this->idUser);
+  	
+  	$result = $query->getResult();
+  	return $result;
+  }
+  /**
+   * Récupère les informations d'une réservation
+   * @return unknown
+   */
+  private function getinfoReservation() {
+  	$em = $this->getDoctrine()->getManager();
+  	$query = $em->createQuery('SELECT r.dateDebutRes, r.dateFinRes , r.lieuRetrait, r.lieuRetour , r.numReservation , v.description , v.prix,v.boite,v.marque,v.modele,v.categorie,v.nbPorte,v.nbPassage FROM ApiBundle:Reservation r , ApiBundle:Voiture v WHERE r.numReservation = :num AND v.id = r.idVoiture ')
+  	->setParameter('num', $this->numReservation);
+  	$result = $query->getResult();
+  	return $result;
+  }
 }
