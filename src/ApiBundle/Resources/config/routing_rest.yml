@@ -1,0 +1,14 @@
+voiture : 
+  type: rest
+  resource:     "ApiBundle:VoitureRest"
+  name_prefix:  api_
+
+users : 
+  type: rest
+  resource:     "ApiBundle:UserRest"
+  name_prefix:  api_
+
+reservation : 
+  type: rest
+  resource:     "ApiBundle:ReservationRest"
+  name_prefix:  api_
