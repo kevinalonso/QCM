@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use ApiBundle\Entity\Reservation;
 use ApiBundle\Entity\ReservationUser;
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 
 class ReservationRestController extends BaseController
 {
@@ -19,6 +20,19 @@ class ReservationRestController extends BaseController
 	private $adresseRetour;
 	private $numReservation;
 	
+  /**
+   * @ApiDoc(
+   *    description="Permet de réserver une voiture",
+   *    requirements={
+   *      {"name"="token", "requirement"="obligatory", "dataType"="string"},
+   *      {"name"="idVoiture","requirement"="obligatory", "dataType"="integer"},
+   *      {"name"="adresseRetour","requirement"="nonobligatory", "dataType"="string"},
+   *      {"name"="adresseRetrait","requirement"="nonobligatory", "dataType"="string"},
+   *      {"name"="dateRetour","requirement"="obligatory", "dataType"="datetime"},
+   *      {"name"="dateRetrait","requirement"="obligatory", "dataType"="datetime"}
+   *  }
+   * )
+  */
   public function postReservationAction(Request $request){
   	$response = new Response();
   	//** Récupération des paramètres **//
@@ -82,6 +96,14 @@ class ReservationRestController extends BaseController
    return json_encode($obj);
   }
   
+  /**
+   * @ApiDoc(
+   *    description="Permet de consulter sa réservation",
+   *    requirements={
+   *      {"name"="token", "requirement"="obligatory", "dataType"="string"}
+   *  }
+   * )
+  */
   public function getReservationMesreservationAction(Request $request) {
   	
   	$this->token = $request->query->get('token');
@@ -99,6 +121,15 @@ class ReservationRestController extends BaseController
   	return $UserReservations;
   }
   
+  /**
+   * @ApiDoc(
+   *    description="Permet de consulter les informations de ma réservation",
+   *    requirements={
+   *      {"name"="token", "requirement"="obligatory", "dataType"="string"},
+   *      {"name"="numeroReservation", "requirement"="obligatory", "dataType"="string"}
+   *  }
+   * )
+  */
   public function getReservationInfoAction(Request $request) {
   	
   	$this->token = $request->query->get('token');
